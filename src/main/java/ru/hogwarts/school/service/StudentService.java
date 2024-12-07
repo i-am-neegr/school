@@ -1,6 +1,7 @@
 package ru.hogwarts.school.service;
 
 import org.springframework.stereotype.Service;
+import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repository.StudentRepository;
 
@@ -32,5 +33,12 @@ public class StudentService {
 
     public Student putStudent(Student student) {
         return this.studentRepository.save(student);
+    }
+
+    public Collection<Student> getStudentBetweenAge(int startAge, int endAge) {
+        return  studentRepository.findStudentsByAgeBetween(startAge, endAge);
+    }
+    public Faculty getStudentFaculty(Long id){
+        return getStudent(id).getFaculty();
     }
 }
