@@ -1,21 +1,20 @@
 package ru.hogwarts.school.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
+
 
 @Entity
 public class Avatar {
     @Id
     @GeneratedValue
-    Long id;
-    String filePath;
-    long fileSize;
-    String mediaType;
-    byte[] data;
+    private Long id;
+    private String filePath;
+    private long fileSize;
+    private String mediaType;
+    @Lob
+    private byte[] data;
     @OneToOne
-    Student student;
+    private Student student;
 
     public Long getId() {
         return id;
@@ -23,14 +22,6 @@ public class Avatar {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getFilePath() {
-        return filePath;
-    }
-
-    public void setFilePath(String filePat) {
-        this.filePath = filePat;
     }
 
     public long getFileSize() {
@@ -55,6 +46,14 @@ public class Avatar {
 
     public void setData(byte[] data) {
         this.data = data;
+    }
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
     }
 
     public Student getStudent() {

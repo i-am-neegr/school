@@ -19,14 +19,6 @@ public class Student {
     @OneToOne
     private Avatar avatar;
 
-    public Avatar getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(Avatar avatar) {
-        this.avatar = avatar;
-    }
-
     public Faculty getFaculty() {
         return faculty;
     }
