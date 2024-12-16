@@ -16,6 +16,7 @@ public class Student {
     @JoinColumn(name = "faculty_id")
     private Faculty faculty;
 
+    @JoinColumn(name = "avatar_id")
     @OneToOne
     private Avatar avatar;
 

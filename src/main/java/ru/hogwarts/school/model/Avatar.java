@@ -13,8 +13,10 @@ public class Avatar {
     private String mediaType;
     @Lob
     private byte[] data;
+    @JoinColumn(name = "student_id")
     @OneToOne
     private Student student;
+
 
     public Long getId() {
         return id;
