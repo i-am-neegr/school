@@ -42,4 +42,8 @@ public class FacultyService {
     public Set<Student> getStudentsFromFaculty(Long id){
         return getFaculty(id).getStudents();
     }
+
+    public Integer getStudentsCount(Long id) {
+        return facultyRepository.countStudentsInFaculty(id);
+    }
 }

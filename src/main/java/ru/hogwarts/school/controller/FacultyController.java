@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
+import ru.hogwarts.school.repository.FacultyRepository;
 import ru.hogwarts.school.service.FacultyService;
 
 import java.util.Collection;
@@ -63,5 +64,10 @@ public class FacultyController {
     @GetMapping("get/students/{id}")
     public ResponseEntity<Set<Student>> getStudents(@PathVariable Long id) {
         return ResponseEntity.ok(facultyService.getStudentsFromFaculty(id));
+    }
+
+    @GetMapping("get/students/count/{id}")
+    public ResponseEntity<Integer> countStudents(@PathVariable Long id) {
+        return ResponseEntity.ok(facultyService.getStudentsCount(id));
     }
 }
