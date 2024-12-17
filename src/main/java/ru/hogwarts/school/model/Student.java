@@ -63,4 +63,12 @@ public class Student {
     public int hashCode() {
         return Objects.hash(id, name, age);
     }
+
+    public Avatar getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(Avatar avatar) {
+        this.avatar = avatar;
+    }
 }

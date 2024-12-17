@@ -15,6 +15,7 @@ public class Avatar {
     @Lob
     @JsonIgnore
     private byte[] data;
+    @JsonIgnore
     @JoinColumn(name = "student_id")
     @OneToOne
     private Student student;
