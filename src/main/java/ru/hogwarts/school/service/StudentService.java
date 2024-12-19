@@ -62,4 +62,28 @@ public class StudentService {
         logger.info("Get last students");
         return studentRepository.getLastStudent(limit);
     }
+
+    public Collection<String> getNamesStartingWith(String prefix) {
+        logger.info("Get names starting with {}", prefix);
+        Collection<Student> students = this.getStudents();
+        String finalPrefix = prefix.toLowerCase();
+        return students
+                .stream()
+                .parallel()
+                .filter(student -> student.getName().toLowerCase().startsWith(finalPrefix))
+                .map(student -> student.getName().toUpperCase())
+                .sorted().toList();
+    }
+
+    public Double getAverageAge() {
+        logger.info("Get average age");
+        Collection<Student> students = this.getStudents();
+        
+        return students
+                .stream()
+                .parallel()
+                .mapToInt(Student::getAge)
+                .average()
+                .orElse(0.0);
+    }
 }

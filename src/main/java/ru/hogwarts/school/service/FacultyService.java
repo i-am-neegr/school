@@ -59,4 +59,14 @@ public class FacultyService {
         logger.info("getStudentsCount");
         return facultyRepository.countStudentsInFaculty(id);
     }
+
+    public String getMaxLengthName(){
+        logger.info("getMaxLengthName");
+        Faculty faculty = new Faculty();
+        faculty.setName("");
+        Collection<Faculty> faculties = getFaculties();
+        return faculties.stream().
+                max(Comparator.comparing(o -> o.getName().length())).
+                orElse(faculty).getName();
+    }
 }

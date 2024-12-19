@@ -70,4 +70,9 @@ public class FacultyController {
     public ResponseEntity<Integer> countStudents(@PathVariable Long id) {
         return ResponseEntity.ok(facultyService.getStudentsCount(id));
     }
+
+    @GetMapping("/get/longest-name")
+    public ResponseEntity<String> getLongestName() {
+        return ResponseEntity.ok(facultyService.getMaxLengthName());
+    }
 }

@@ -71,4 +71,14 @@ public class StudentController {
     public ResponseEntity<Collection<Student>> getLastStudent(@PathVariable Integer limit) {
         return ResponseEntity.ok(studentService.getLastStudents(limit));
     }
+
+    @GetMapping("get/names-startingwith{prefix}")
+    public ResponseEntity<Collection<String>> getNamesStartingWith(@PathVariable String prefix) {
+        return ResponseEntity.ok(studentService.getNamesStartingWith(prefix));
+    }
+
+    @GetMapping("get/average-age")
+    public ResponseEntity<Double> getAverage() {
+        return ResponseEntity.ok(studentService.getAverageAge());
+    }
 }
