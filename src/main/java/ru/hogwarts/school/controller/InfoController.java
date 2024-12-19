@@ -7,9 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("info")
+@RequestMapping("/info")
 @Profile("default")
 public class InfoController {
+
     @Value("${server.port}")
     private Integer port;
 
@@ -17,4 +18,7 @@ public class InfoController {
     public String info() {
         return "Server port: " + port;
     }
+
+
+
 }
