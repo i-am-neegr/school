@@ -2,15 +2,21 @@ package ru.hogwarts.school.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repository.StudentRepository;
 
+import java.awt.geom.RectangularShape;
 import java.util.Collection;
+import java.util.List;
 
 @Service
 public class StudentService {
+
+    private final Object flag = new Object();
+
     private final StudentRepository studentRepository;
 
     private final Logger logger = LoggerFactory.getLogger(StudentService.class);
@@ -85,5 +91,60 @@ public class StudentService {
                 .mapToInt(Student::getAge)
                 .average()
                 .orElse(0.0);
+    }
+
+    public void printParallel() {
+        logger.info("Print parallel");
+        List<Student> students = getStudents().stream().toList();
+        if (students.size() < 6) {
+            throw new RuntimeException("Not enough students");
+        }
+
+        System.out.println(students.get(0).getName());
+        System.out.println(students.get(1).getName());
+
+        new Thread(() -> {
+            System.out.println(students.get(2).getName());
+            System.out.println(students.get(3).getName());
+        }).start();
+
+        new Thread(() -> {
+            System.out.println(students.get(4).getName());
+            System.out.println(students.get(5).getName());
+        }).start();
+    }
+
+    private void parallelPrint(int index, List<Student> students) {
+        synchronized (flag) {
+            System.out.println(students.get(index).getName());
+        }
+        try {
+            Thread.sleep(10);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void printSynchronized() {
+        logger.info("Print synchronized");
+
+        List<Student> students = getStudents().stream().toList();
+
+        if (students.size() < 6) {
+            throw new RuntimeException("Not enough students");
+        }
+
+        parallelPrint(0, students);
+        parallelPrint(1, students);
+
+        new Thread(() -> {
+            parallelPrint(2, students);
+            parallelPrint(3, students);
+        }).start();
+
+        new Thread(() -> {
+            parallelPrint(4, students);
+            parallelPrint(5, students);
+        }).start();
     }
 }
