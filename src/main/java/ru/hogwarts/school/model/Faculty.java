@@ -3,6 +3,7 @@ package ru.hogwarts.school.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.util.Objects;
 import java.util.Set;
 
 
@@ -46,4 +47,26 @@ public class Faculty {
         this.name = name;
     }
 
+    @Override
+    public String toString() {
+        return "Faculty{" +
+                "color='" + color + '\'' +
+                ", id=" + id +
+                ", name='" + name + '\'' +
+                ", students=" + students +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Faculty faculty = (Faculty) o;
+        return Objects.equals(id, faculty.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
 }
