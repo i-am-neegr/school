@@ -66,7 +66,7 @@ public class AvatarService {
 
     }
 
-    public File getAvatarFromDirectory(Long StudentId) throws IOException {
+    public File getAvatarFromDirectory(Long StudentId){
         logger.info("get avatar from directory");
         File folder = new File(avatarDir);
         File[] files = folder.listFiles();
